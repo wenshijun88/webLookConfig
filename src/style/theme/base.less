@@ -1,0 +1,206 @@
+.layout {
+  height: 100%;
+  width: 100%;
+  min-width: 900px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  position: relative;
+}
+
+// 外层布局容器
+.layout-container {
+  display: flex;
+  flex-direction: column;
+
+  &--header {
+    height: 60px;
+    display: flex;
+
+    .logo {
+      width: 200px;
+      position: relative;
+      line-height: 60px;
+      text-align: center;
+
+      img {
+        max-height: 40px;
+        vertical-align: middle;
+      }
+
+      span {
+        vertical-align: middle;
+        margin-left: 10px;
+        font-size: 20px;
+      }
+    }
+
+    // 切换按钮
+    .toggle-btn {
+      float: left;
+      height: 60px;
+      width: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      i {
+        font-size: 20px;
+        margin-top: 4px;
+      }
+    }
+
+    .header-menu {
+      display: flex;
+      flex-grow: 1;
+    }
+
+    .header-right {
+      float: right;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding-right: 10px;
+      box-align: center;
+    }
+  }
+
+  &--bottom {
+    // padding: 0;
+    // position: relative;
+    display: flex;
+    flex-grow: 1;
+  }
+}
+
+// 左菜单
+.aside-menu {
+  // width: 200px;
+  // overflow: auto;
+  height: 100%;
+  border-right: 1px solid #eee;
+}
+
+// 核心布局容器
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  &-header {}
+
+  &-body {
+    display: flex;
+    flex-grow: 1;
+  }
+}
+
+
+// 内容布局容器
+.content-container {
+  display: flex;
+  flex-grow: 1;
+  padding-bottom: 20px;
+
+  &--left {
+    min-width: 200px;
+    display: flex;
+
+    .tree {
+
+      background: #fff;
+      padding: 20px;
+      margin: 10px 0 0 10px;
+      border-radius: 10px;
+      flex-grow: 1;
+      overflow: auto;
+      position: relative;
+      background: #fff;
+      border-radius: 10px;
+    }
+  }
+
+  &--right {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    position: relative;
+
+    .pos {
+      display: flex;
+      flex-direction: column;
+      // flex-grow: 1;
+      position: absolute;
+      top: 10px;
+      right: 1px;
+      bottom: 0;
+      left: 0;
+    }
+
+  }
+
+  &--header {
+    background: #fff;
+    padding: 10px;
+    margin: 0 10px 10px;
+    border-radius: 10px;
+  }
+
+  &--content {
+    flex-grow: 1;
+    padding: 12px;
+    margin: 0 10px;
+    overflow: auto;
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+
+    .operation {
+      padding-bottom: 10px;
+    }
+
+    .pagination {
+      display: flex;
+      padding: 10px 0;
+    }
+  }
+
+  &--footer {}
+
+}
+
+// 小部件
+// 小提示
+.bold {
+  color: red;
+}
+
+.txt-btn{
+  color:#409EFF;
+  cursor: pointer;
+  &-danger{
+    color: #F56C6C;
+    cursor: pointer;
+  }
+  &-warning{
+    color:#E6A23C;
+    cursor: pointer;
+  }
+  &+.txt-btn{
+    margin-left: 10px;
+  }
+}
+
+
+#preview-img{
+  max-height: 100px;
+  max-width: 100px;
+  // display: inline;
+  margin: 10px;
+}
+
+
+// 模态框的搜索表单区域
+.dialog-form{
+  margin-bottom: 20px;
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "menuName": "组件库",
+    "children": [
+      {
+        "menuName": "表单",
+        "url": "#",
+        "children": [
+          {"menuName": "Input 输入框"},
+          {"menuName": "Radio 单选框"}
+        ]
+      },
+      {
+        "menuName": "Data 数据",
+        "url": "#",
+        "children": [
+          {"menuName": "Table 表格"},
+          {"menuName": "Tag 标签"}
+        ]
+      }
+    ]
+  }
+]

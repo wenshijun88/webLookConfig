@@ -1,0 +1,27 @@
+[
+  {
+    "menuName": "组件库",
+    "children": [
+      {
+        "menuName": "表单",
+        "visible": 0,
+        "menuId": 1187,
+        "url": "#",
+        "children": [
+          {"menuName": "Input 输入框","visible": 0, "menuId":1},
+          {"menuName": "Radio 单选框","visible": 0,"menuId":2}
+        ]
+      },
+      {
+        "menuName": "Data 数据",
+        "url": "#",
+        "visible": 0,
+        "menuId": 1188,
+        "children": [
+          {"menuName": "Table 表格","visible": 0,"menuId":3},
+          {"menuName": "Tag 标签","visible": 0,"menuId":4}
+        ]
+      }
+    ]
+  }
+]

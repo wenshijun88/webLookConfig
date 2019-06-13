@@ -1,0 +1,82 @@
+
+@import '../variables.less';
+
+.el-submenu__title,
+.el-menu-item {
+  background: @theme-bg-color;
+
+  &:hover {
+    background: #fff;
+  }
+}
+
+.el-menu--popup{
+  padding: 0;
+}
+
+.el-menu-width:not(.el-menu--collapse) {
+  width: 200px;
+}
+
+.fa {
+  width: 20px;
+  text-align: center;
+  font-size: 16px;
+  margin-right: 2px;
+}
+
+.el-button--text {
+  color: @color-text-normal
+}
+
+.btn-text {
+  padding: 14px 12px;
+  border-radius: 4px;
+  margin: 0 !important;
+}
+
+
+
+// .el-table td,
+// .el-table th {
+//   padding: 8px 0;
+// }
+
+// .el-menu--collapse {
+//   // 收缩大小
+//   width: 64px;
+// }
+
+// .el-menu-vertical:not(.el-menu--collapse) {
+//   // 展开大小
+//   width: 200px;
+//   min-height: 400px;
+// }
+
+.el-button--mini,
+.el-button--mini.is-round {
+  .fa {
+    width: 16px;
+    margin: 0;
+  }
+
+  padding: 7px 10px;
+}
+
+// 上传图片样式
+.el-upload--picture-card {
+  width: 100px;
+  height: 100px;
+  line-height: 110px;
+}
+
+.el-upload-list--picture-card {
+  .el-upload-list__item {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.disabled .el-upload--picture-card {
+  display: none;
+}
