@@ -10,10 +10,12 @@
                     </template>
                     <el-menu-item v-for="item in submenu.children" :index="String(item.menuId)" :key="item.menuId"
                                   v-if="item.visible === 0">
-                        <ws-icon :name="item.icon || 'folder-o'" />
-                        <span slot="title">
-                          <span>{{item.menuName || '未命名菜单'}}</span>
-                        </span>
+                        <li class="dragItem" @dragstart="dragstart" :data-name="item.componentName" draggable="true">
+                            <ws-icon :name="item.icon || 'folder-o'" />
+                            <span slot="title">
+                                <span>{{item.menuName || '未命名菜单'}}</span>
+                            </span>
+                        </li>
                     </el-menu-item>
                 </el-submenu>
                 <el-menu-item :index="String(item.menuId)" :key="submenu.menuId" v-else>
@@ -43,11 +45,13 @@
             return {}
         },
         methods: {
-
+            dragstart(e){
+                this.dragStart(e)
+            }
         }
     }
 </script>
-<style lang="less" scoped>
+<style lang="less">
     .ws-menu-sider {
         overflow: auto;
         height: 100%;
@@ -55,5 +59,14 @@
         &::-webkit-scrollbar {
             display: none;
         }
+        .el-menu-item:hover {
+            background: #fff;
+        }
+        .menuitem:hover{
+            background: #fff;
+        }
+    }
+    .dragItem{
+        cursor: move;
     }
 </style>

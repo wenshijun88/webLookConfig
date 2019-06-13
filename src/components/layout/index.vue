@@ -31,7 +31,7 @@
                     <div class="main-layout">
                         <!--可视化编辑栏-->
                         <div class="main-layout-body">
-
+                            <router-view></router-view>
                         </div>
                         <!-- </div> -->
                     </div>
