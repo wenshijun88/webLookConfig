@@ -9,7 +9,7 @@
         "url": "#",
         "children": [
           {"menuName": "Input 输入框","componentName": "el-input","visible": 0, "menuId":1},
-          {"menuName": "Radio 单选框","visible": 0,"menuId":2}
+          {"menuName": "Radio 单选框","componentName": "el-radio","visible": 0,"menuId":2}
         ]
       },
       {
