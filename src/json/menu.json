@@ -1,25 +1,120 @@
 [
   {
-    "menuName": "组件库",
+    "menuName": "常见图表库",
     "children": [
       {
-        "menuName": "表单",
+        "menuName": "折线图",
+        "visible": 0,
+        "menuId": 1186,
+        "url": "#",
+        "children": [
+          {
+            "title": "Basic Line Chart",
+            "chartImgSrc": "https://www.echartsjs.com/examples/data/thumb/line-simple.jpg",
+            "visible": 0,
+            "menuId":3,
+            "options": {
+              "xAxis": {
+                "type": "category",
+                "data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+              },
+              "yAxis": {
+                "type": "value"
+              },
+              "series": [{
+                "data": [820, 932, 901, 934, 1290, 1330, 1320],
+                "type": "line"
+              }]
+            }
+          },
+          {
+            "title": "Stacked Line Chart",
+            "chartImgSrc": "https://www.echartsjs.com/examples/data/thumb/line-stack.jpg",
+            "visible": 0,
+            "menuId":4,
+            "options": {
+              "title": {
+                "text": "折线图堆叠"
+              },
+              "tooltip": {
+                "trigger": "axis"
+              },
+              "legend": {
+                "data":["邮件营销","联盟广告","视频广告","直接访问","搜索引擎"]
+              },
+              "grid": {
+                "left": "3%",
+                "right": "4%",
+                "bottom": "3%",
+                "containLabel": true
+              },
+              "toolbox": {
+                "feature": {
+                  "saveAsImage": {}
+                }
+              },
+              "xAxis": {
+                "type": "category",
+                "boundaryGap": false,
+                "data": ["周一","周二","周三","周四","周五","周六","周日"]
+              },
+              "yAxis": {
+                "type": "value"
+              },
+              "series": [
+                {
+                  "name":"邮件营销",
+                  "type":"line",
+                  "stack": "总量",
+                  "data":[120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                  "name":"联盟广告",
+                  "type":"line",
+                  "stack": "总量",
+                  "data":[220, 182, 191, 234, 290, 330, 310]
+                },
+                {
+                  "name":"视频广告",
+                  "type":"line",
+                  "stack": "总量",
+                  "data":[150, 232, 201, 154, 190, 330, 410]
+                },
+                {
+                  "name":"直接访问",
+                  "type":"line",
+                  "stack": "总量",
+                  "data":[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                  "name":"搜索引擎",
+                  "type":"line",
+                  "stack": "总量",
+                  "data":[820, 932, 901, 934, 1290, 1330, 1320]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "menuName": "柱状图",
         "visible": 0,
         "menuId": 1187,
         "url": "#",
         "children": [
-          {"menuName": "Input 输入框","componentName": "el-input","visible": 0, "menuId":1},
-          {"menuName": "Radio 单选框","componentName": "el-radio","visible": 0,"menuId":2}
+          {"title": "柱状图动画延迟","chartImgSrc": "https://www.echartsjs.com/examples/data/thumb/bar-animation-delay.jpg","visible": 0, "menuId":3},
+          {"title": "柱状图框选","chartImgSrc": "https://www.echartsjs.com/examples/data/thumb/bar-brush.jpg","visible": 0,"menuId":4}
         ]
       },
       {
-        "menuName": "Data 数据",
+        "menuName": "饼图",
         "url": "#",
         "visible": 0,
         "menuId": 1188,
         "children": [
-          {"menuName": "Table 表格","visible": 0,"menuId":3},
-          {"menuName": "Tag 标签","visible": 0,"menuId":4}
+          {"title": "Customized Pie", "chartImgSrc": "https://www.echartsjs.com/examples/data/thumb/pie-custom.jpg", "visible": 0,"menuId":5},
+          {"title": "Doughnut Chart","chartImgSrc":"https://www.echartsjs.com/examples/data/thumb/pie-doughnut.jpg","visible": 0,"menuId":6}
         ]
       }
     ]

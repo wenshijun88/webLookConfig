@@ -9,6 +9,8 @@ const system = {
         paginationConfig: {
             pageSizes: [10, 15, 20, 50],
         },
+        topHeight: '',  //顶部栏高度
+        leftWidth: '',  //左边组件栏宽度
         size: 'mini'
     },
     mutations: {
@@ -24,8 +26,34 @@ const system = {
         SET_FULLSCREEN: (state, status) => {
             state.isFullScreen = status
         },
+        SET_TOPHEIGHT: (state, height) => {
+            state.topHeight = height
+        },
+        SET_LEFTWIDTH: (state, width) => {
+            state.leftWidth = width
+        }
     },
     actions: {
+        /**
+         * @description 设置顶部高度
+         */
+        async setTopHeight({commit}, height){
+            try {
+                commit('SET_TOPHEIGHT', height)
+            }catch (err) {
+                console.log(err)
+            }
+        },
+        /**
+         * @description 设置侧边栏宽度
+         */
+        async setLeftWidth({commit}, width){
+            try {
+                commit('SET_LEFTWIDTH', width)
+            }catch (err) {
+                console.log(err)
+            }
+        },
         /**
          * @description 设置菜单，会初始化侧边栏
          */

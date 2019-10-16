@@ -12,6 +12,9 @@ export default {
     this.$api.system.init().then(res => {
       this.$store.dispatch('setMenu', res.data.data)
     })
+    this.$api.system.testNgix()
+  },
+  methods: {
   }
 }
 </script>

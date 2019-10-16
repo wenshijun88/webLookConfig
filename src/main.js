@@ -3,13 +3,15 @@ import router from './router'
 import App from './App.vue'
 import store from './store'
 import ElementUI from 'element-ui'
+import echarts from 'echarts'
 import 'element-ui/lib/theme-chalk/index.css';
-import {dragStart} from './utils/drag'
+import {saveComponent} from './utils/drag'
 import api from './api' //导入api接口
 
 Vue.config.productionTip = false;
 Vue.prototype.$api = api;
-Vue.prototype.dragStart = dragStart
+Vue.prototype.saveComponent = saveComponent
+Vue.prototype.$echarts = echarts
 
 Vue.use(ElementUI)
 

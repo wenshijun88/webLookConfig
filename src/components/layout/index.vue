@@ -4,7 +4,7 @@
         <div class="layout-mask full"></div>
         <!-- 主体内容 -->
         <div class="layout-container full">
-            <div class="layout-container--header">
+            <div class="layout-container--header" id="layout-container--header">
                 <transition name="fade-scale">
                     <div class="logo" :style="{width:isCollapse?'64px':'200px' }">
                         <img src="../../assets/logo.png" class="logo">
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="layout-container--bottom">
-                <div class="aside-menu">
+                <div class="aside-menu" id="aside-menu">
                     <ws-menu-sider :menu="menuSider" :isCollapse="isCollapse" />
                 </div>
                 <transition name="fade-scale">
@@ -71,7 +71,18 @@
                 return this.$store.state.system.isCollapse
             }
         },
+        mounted(){
+            this.$nextTick(()=>{
+                this.initDomSize()
+            })
+        },
         methods: {
+            initDomSize(){
+                let topHeight = document.getElementById("layout-container--header").offsetHeight;
+                let leftWidth = document.getElementById("aside-menu").offsetWidth;
+                this.$store.dispatch('setTopHeight', topHeight);
+                this.$store.dispatch('setLeftWidth', leftWidth)
+            },
             // 菜单栏关闭
             toggleSider() {
                 this.$store.dispatch('toggleSider')
