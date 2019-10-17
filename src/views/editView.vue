@@ -1,14 +1,18 @@
 <template>
     <div class="container">
         <div class="view-container">
-            <div v-for="item in componentList" class="component_wraper" v-bind:style="{left: item.attrs.position.left+'px',top: item.attrs.position.top + 'px'}">
-                <div class="editChart" @click="editEchart(item)">编辑图表</div>
-                <div class="component_box" :id="item.id"></div>
-                <div class="component_box" draggable="true" v-if="item.componentName === 'div'">
-                    <div class="component_box div_box" @dragenter="dragEnter">
+            <div style="width: 100%; height: 100%">
+                <vue-draggable-resizable :key="item.id" v-for="item in componentList" :w="widthConfig[item.id]" :h="heightConfig[item.id]" v-on:dragging="onDrag" v-on:resizing="onResize" :parent="true">
+                    <div style="width: 100%; height: 100%" @mousedown="setCurEditItem(item)">
+                        <div class="editChart" @click="editEchart(item)">编辑图表</div>
+                        <div class="component_box" :id="item.id"></div>
+                        <div class="component_box" draggable="true" v-if="item.componentName === 'div'">
+                            <div class="component_box div_box" @dragenter="dragEnter">
 
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </vue-draggable-resizable>
             </div>
         </div>
         <modalEditEchart :options="editChartConfig.options" @close="closeModalEditEchart" v-if="isShowModalEditChart"></modalEditEchart>
@@ -17,10 +21,12 @@
 
 <script>
     import modalEditEchart from "@/components/modalEditEchart/modalEditEchart"
+    import VueDraggableResizable from 'vue-draggable-resizable-gorkys'
     export default {
         name: 'editView',
         components: {
             modalEditEchart,
+            VueDraggableResizable
         },
         data(){
             return {
@@ -30,7 +36,17 @@
                 editChartConfig: {
                     options: {}
                 },
-                isShowModalEditChart: false
+                dragCurItemConfig: {
+                    id: '',
+                    options: {}
+                },
+                widthConfig: {
+
+                },
+                heightConfig: {
+
+                },
+                isShowModalEditChart: false,
             }
         },
         mounted(){
@@ -45,6 +61,7 @@
                     this.myEchart[id] = this.$echarts.init(document.getElementById(id))
                     this.myEchart[id].setOption(options)
                 })
+                this.initSizeConfig(this.$store.state.viewConfig.saveComponent)
                 return this.$store.state.viewConfig.saveComponent
             }
         },
@@ -55,6 +72,12 @@
                     this.$set(this.editFormData,item.menuId,item)
                 }
             },
+            initSizeConfig(componentList) {
+                componentList.forEach(item => {
+                    this.$set(this.widthConfig, item.id, 380)
+                    this.$set(this.heightConfig, item.id, 300)
+                })
+            },
             dragEnter(e){
                 console.log(e)
             },
@@ -64,11 +87,22 @@
             },
             closeModalEditEchart() {
                 this.isShowModalEditChart = false
+            },
+            onResize: function (x, y, width, height) {
+                let {id, options} = this.dragCurItemConfig
+                this.myEchart[id].resize();
+            },
+            onDrag: function (x, y, item) {
+
+            },
+            setCurEditItem(item) {
+                this.dragCurItemConfig = item
             }
         }
     }
 </script>
 <style lang="less">
+    @import '../style/vue-draggable-resizable.css';
     .container{
         width: 100%;
         display: flex;
@@ -91,8 +125,8 @@
         }
     }
     .component_box {
-        width: 380px;
-        height: 300px;
+        width: 100%;
+        height: 100%;
     }
     .component_wraper .editChart{
         padding: 5px 13px;
