@@ -18,7 +18,7 @@ module.exports = {
         },
         open: process.platform === 'darwin',
         host: '0.0.0.0',
-        port: 8080,
+        port: 5005,
         https: false,
         hotOnly: false,
         proxy: null      //设置跨域，即将本文件内任何没有匹配到的静态文件，都指向跨域地址

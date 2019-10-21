@@ -5,12 +5,16 @@
                 <editTitle @submit="changeEchart" v-if="showEditConfig.isShowEditTitle"></editTitle>
                 <editXAxis @submit="changeEchart" v-if="showEditConfig.isShowEditXAxis"></editXAxis>
                 <editYAxis @submit="changeEchart" v-if="showEditConfig.isShowEditYAxis"></editYAxis>
+                <editBackgroundColor @submit="changeEchartByOne"
+                                     :backgroundColor="options.backgroundColor"
+                                     v-if="showEditConfig.isShowEditBackground"></editBackgroundColor>
             </div>
             <div class="rightContainer" style="width: 66%">
                 <div class="editBtn">
                     <div class="btn" @click="showEdit('isShowEditTitle')">编辑标题</div>
                     <div class="btn" @click="showEdit('isShowEditXAxis')">编辑X轴</div>
                     <div class="btn" @click="showEdit('isShowEditYAxis')">编辑Y轴</div>
+                    <div class="btn" @click="showEdit('isShowEditBackground')">编辑图表背景</div>
                 </div>
                 <div id="chart-panel" class="right-panel" style="width: 100%; height: 100%"></div>
             </div>
@@ -26,12 +30,14 @@
     import editTitle from '@/components/editForms/editTitle'
     import editXAxis from '@/components/editForms/editXAxis'
     import editYAxis from '@/components/editForms/editYAxis'
+    import editBackgroundColor from '@/components/editForms/editBackgroundColor'
     export default {
         name: 'modalEditEchart',
         components: {
             editTitle,
             editXAxis,
-            editYAxis
+            editYAxis,
+            editBackgroundColor
         },
         props: {
             options: {
@@ -47,7 +53,8 @@
                 showEditConfig: {
                     isShowEditTitle: false,
                     isShowEditXAxis: false,
-                    isShowEditYAxis: false
+                    isShowEditYAxis: false,
+                    isShowEditBackground: false
                 }
             }
         },
@@ -64,7 +71,8 @@
                 this.echart.setOption(this.options)
             },
             handleSubmit() {
-
+                this.$emit('submit', this.options)
+                this.close()
             },
             close() {
                 this.$emit('close')
@@ -74,6 +82,10 @@
                     this.showEditConfig[key] = false
                 }
                 this.showEditConfig[field] = true
+            },
+            changeEchartByOne(field, val) {
+                this.options[field] = val;
+                this.echart.setOption(this.options)
             }
         }
     }
