@@ -6,9 +6,6 @@ const system = {
         menuSider: [],
         isFullScreen: false,
         isCollapse: false,
-        paginationConfig: {
-            pageSizes: [10, 15, 20, 50],
-        },
         topHeight: '',  //顶部栏高度
         leftWidth: '',  //左边组件栏宽度
         size: 'mini'

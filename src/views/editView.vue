@@ -6,12 +6,18 @@
                 <span>背景色</span>
                 <colorPicker v-model="color" v-on:change="headleChangeColor"/>
             </div>
+            <div class="tip" @click="showModalPreview">
+                <span>预览</span>
+            </div>
+            <div class="tip">
+                <span>重置</span>
+            </div>
         </div>
 
         <div class="view-container" :style="{'background': color}">
             <div style="width: 100%; height: 100%">
-                <vue-draggable-resizable class-name="component_wraper" :key="item.id" v-for="(item,index) in componentList" :minh="50" :w="widthConfig[item.id]" :h="heightConfig[item.id]" v-on:dragging="onDrag" v-on:resizing="onResize" :parent="true">
-                    <div style="width: 100%; height: 100%" @mousedown="setCurEditItem(item)">
+                <vue-draggable-resizable class-name="component_wraper" :x="item.position.left" :y="item.position.top" :key="item.id" v-for="(item,index) in componentList" :minh="50" :w="widthConfig[item.id]" :h="heightConfig[item.id]" v-on:dragging="onDrag" v-on:resizing="onResize" :parent="true">
+                    <div style="width: 100%; height: 100%" @mousedown="setCurEditItem(item, index)">
                         <div class="editChart" @click="editEchart(item, index)">编辑图表</div>
                         <div class="removeChart" @click="removeEchart(index)">删除</div>
                         <div class="component_box" :id="item.id"></div>
@@ -20,6 +26,7 @@
             </div>
         </div>
         <modalEditEchart :options="editChartConfig.options" @submit="saveEditEchart" @close="closeModalEditEchart" v-if="isShowModalEditChart"></modalEditEchart>
+
     </div>
 </template>
 
@@ -30,7 +37,7 @@
         name: 'editView',
         components: {
             modalEditEchart,
-            VueDraggableResizable
+            VueDraggableResizable,
         },
         data(){
             return {
@@ -40,6 +47,7 @@
                 editChartConfig: {
                     options: {}
                 },
+                dragIndex: 0,
                 dragCurItemConfig: {
                     id: '',
                     options: {}
@@ -51,11 +59,14 @@
 
                 },
                 isShowModalEditChart: false,
+                isShowModalPreview: false,
                 color: '#dae5f0'
             }
         },
         mounted(){
-
+            this.$nextTick(() => {
+                this.init()
+            })
         },
         computed:{
             componentList(){
@@ -71,6 +82,15 @@
             }
         },
         methods: {
+            init() {
+                if(this.$store.state.viewConfig.saveComponent.length<1) return;
+                this.$store.state.viewConfig.saveComponent.forEach(item => {
+                    let {id, options} = item
+                    this.myEchart[id] = this.$echarts.init(document.getElementById(id))
+                    this.myEchart[id].setOption(options)
+                })
+
+            },
             showComponentEdit(item){
                 this.curComponentId = item.id;
                 if(!this.editFormData[item.id]){
@@ -107,15 +127,25 @@
             onResize: function (x, y, width, height) {
                 let {id, options} = this.dragCurItemConfig
                 this.myEchart[id].resize();
+                this.$store.dispatch('saveEchartSize', {index: this.dragIndex, width: width, height: height})
             },
             onDrag: function (x, y, item) {
-
+                this.dragCurItemConfig.position.left = x
+                this.dragCurItemConfig.position.top = y
+                this.$store.dispatch('saveEchartPosition', {index: this.dragIndex, left: x, top: y})
             },
-            setCurEditItem(item) {
+            setCurEditItem(item, index) {
+                this.dragIndex = index
                 this.dragCurItemConfig = item
             },
             headleChangeColor(color) {
                 console.log(color)
+            },
+            showModalPreview() {
+                this.$router.push({name: 'previewChart'})
+            },
+            closeModalPreview() {
+                this.isShowModalPreview = false
             }
         }
     }
@@ -196,6 +226,7 @@
         border-radius: 3px;
         line-height: 100%;
         padding: 3px 5px;
+        margin-right: 10px;
     }
     .tools .tip span{
         vertical-align: middle;

@@ -3,11 +3,13 @@ export function saveComponent(e, item) {
     let componentInfo = {
         id: Math.random().toString(),
         componentName:componentName,
-        attrs:{
-            position: {
-                left: e.clientX- this.$store.state.system.leftWidth,
-                top: e.clientY- this.$store.state.system.topHeight
-            }
+        position: {
+            left: e.clientX- this.$store.state.system.leftWidth,
+            top: e.clientY- this.$store.state.system.topHeight-35
+        },
+        size: {
+            width: 380,
+            height: 300
         },
         options: item.options,
         childComponents:[],
